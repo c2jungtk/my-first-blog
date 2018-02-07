@@ -5,13 +5,19 @@
     <title>나의 블로그</title>
 </head>
 <body>
-    <p>내 사랑 홍공주님</p>
 
-    <p>너와 함께한 시간 모두 눈부셨다.<br>
-        날이 좋아서<br>
-        날이 좋지 않아서<br>
-        날이 적당해서<br>
-        모든 날이 좋았다.</p>
-    <p></p>
+
+    <div>
+        <h1><a href="/">나의 블로그</a></h1>
+    </div>
+{% for post in posts %}
+    <div>
+        <p>published: {{ post.published_date }}</p>
+
+        <h1><a href="">{{ post.title }}</a></h1>
+
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endfor %}
 </body>
 </html>
