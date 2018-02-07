@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<nav>
+    <a href="{% url 'blog:post_edit' pk=post.pk %} ">수정하기</a>
+</nav>
+{% endif %}
+<div>
+
+    {% if post.published_date %}
+        <div>
+            {{ post.published_date }}
+        </div>
+    {% endif %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.text|linebreaksbr }}</p>
+
+</div>
+{% endblock %}
