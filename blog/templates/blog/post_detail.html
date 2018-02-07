@@ -11,6 +11,8 @@
         <div>
             {{ post.published_date }}
         </div>
+    {% else %}
+        <a href="{% url 'blog:post_publish' pk=post.pk %}">배포하기</a>
     {% endif %}
     <h1>{{ post.title }}</h1>
     <p>{{ post.text|linebreaksbr }}</p>
