@@ -5,9 +5,8 @@
     {% for post in posts %}
       <div>
           <p>published: {{ post.published_date }}</p>
-
          <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
-          &nbsp; Comments: {{ post.comments.count }}
+          &nbsp; Comments: {{ post.approved_comments.count }}
           {% if user.is_authenticated %}&nbsp;<a href="{% url 'blog:post_remove' pk=post.pk %}">[삭제]</a>
         {% endif %}
          <p>{{ post.text|linebreaksbr }}</p>

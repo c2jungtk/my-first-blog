@@ -21,14 +21,26 @@
     {% endif %}
     <h1>{{ post.title }}</h1>
     <p>{{ post.text|linebreaksbr }}</p>
+</div>
+<hr>
+<h3><a href="{% url 'blog:add_comment_to_post' pk=post.pk %}">댓글달기</a></h3>
 
-
-    {% for comment in post.comments.all %}
-        <div>{{ comment.created_date}}</div>
+{% for comment in post.comments.all %}
+    {% if user.is_authenticated or comment.approved_comment %}
+        <div>
+            <div>
+               {{ comment.created_date}}
+               {% if not comment.approved_comment %}
+                   <a href="{% url 'blog:comment_remove' pk=comment.pk %}">삭제</a>
+                   <a href="{% url 'blog:comment_approve' pk=comment.pk %}">승인</a>
+               {% endif %}
+            </div>
         <strong>{{ comment.author }}</strong>
         <p>{{ comment.text|linebreaksbr }}</p>
-    {% empty %}
+        </div>
+    {% endif %}
+{% empty %}
         <p>첫 댓글을 작성하셈 디지기 싫으면</p>
-    {% endfor %}
-</div>
+{% endfor %}
+
 {% endblock %}
