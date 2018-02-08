@@ -22,5 +22,13 @@
     <h1>{{ post.title }}</h1>
     <p>{{ post.text|linebreaksbr }}</p>
 
+
+    {% for comment in post.comments.all %}
+        <div>{{ comment.created_date}}</div>
+        <strong>{{ comment.author }}</strong>
+        <p>{{ comment.text|linebreaksbr }}</p>
+    {% empty %}
+        <p>첫 댓글을 작성하셈 디지기 싫으면</p>
+    {% endfor %}
 </div>
 {% endblock %}

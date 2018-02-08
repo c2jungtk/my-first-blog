@@ -17,7 +17,6 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-
             post.save()
             return redirect('blog:post_detail', pk=post.pk)
     else:
