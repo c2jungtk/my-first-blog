@@ -1,15 +1,23 @@
+
 {% extends 'blog/base.html' %}
 
 {% block content %}
     {{ block.super }}
     {% for post in posts %}
-      <div>
-          <p>published: {{ post.published_date }}</p>
-         <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
-          &nbsp; Comments: {{ post.approved_comments.count }}
-          {% if user.is_authenticated %}&nbsp;<a href="{% url 'blog:post_remove' pk=post.pk %}">[삭제]</a>
+      <div class="list-div">
+        <section class="list-sec">
+        <hr>      
+        <a class="title-a" href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>        
+          &nbsp;
+          <p class="p-inline">Comments: {{ post.approved_comments.count }}</p><hr>
+          <p class="p-text">{{ post.text|linebreaksbr }}</p>
+         <p class="p-pub"><span>published</span>: {{ post.published_date }}</p>
+          {% if user.is_authenticated %}&nbsp;<a class="a-del" href="{% url 'blog:post_remove' pk=post.pk %}">[삭제]</a>
+
         {% endif %}
-         <p>{{ post.text|linebreaksbr }}</p>
+
+         
+        </section>
       </div>
     {% endfor %}
 {% endblock %}

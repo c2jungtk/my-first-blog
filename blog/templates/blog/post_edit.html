@@ -1,13 +1,14 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+<div class="edit-div">
+	<h1>새 글쓰기</h1>
+	
+	<form action="" method="POST">
+	    {% csrf_token %}
+	    {{ form.as_p }}
+	    <button type="submit">저장</button>
 
-<h1>새 글쓰기</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">저장</button>
-
-</form>
-
+	</form>
+</div>
 {% endblock %}
