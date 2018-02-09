@@ -1,12 +1,13 @@
-{% extends 'blog/base.html' %}
+{% extends 'board/base.html' %}
+
 {% block content %}
-<div class="edit-div">
+<div>
 	<h1>새 글쓰기</h1>
 	
 	<form action="" method="POST">
 	    {% csrf_token %}
 	    {{ form.as_p }}
-	    <button type="submit">저장</button>
+	    <button type="submit">쓰기</button>
 
 	</form>
 </div>

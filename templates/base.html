@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>홈</title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+<body>
+<div class="wrap">
+    <header>
+        <div>
+            <h1><a href="/">홈</a></h1>
+        </div>
+    </header>
+
+    <div >
+
+    {% if user.is_authenticated %}
+
+        <div class="wrap">
+            <p>안녕하세요. '{{ user.first_name }}'님</p>
+            <a href="{% url 'logout' %}">로그아웃</a>
+        </div>
+
+    {% else %}
+        <div >
+            <a href="{% url 'login' %}">로그인</a>
+        </div>
+    </div>
+    {% endif %}
+    <nav class="base-nav">
+        <ul>
+            <li><a href="{% url 'blog:post_list' %}">태군찡블로그</a></li>
+            <li><a href="{% url 'board:post_list' %}">태군찡게시판</a></li>
+        </ul>
+    </nav>
+    {% block home %}
+    {% endblock %}
+    {% block blog %}
+    {% endblock %}
+    {% block board %}
+    {% endblock %}
+
+</div>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block home %}
+
+<div>
+    <h1><a href="{% url 'blog:post_list' %}">블로그 최신글</a></h1>
+    <ol>
+        {% for post in posts %}
+        <li><a href="{% url 'blog:post_detail' pk=post.pk %}">
+            {{ post.title }} | {{ post.created_date }}</a>
+        </li>
+        {% endfor %}
+    </ol>
+
+</div>
+<div>
+    <h1><a href="{% url 'board:post_list' %}">게시판 최신글</a></h1>
+    <ol>
+        {% for board in boards %}
+        <li><a href="{% url 'board:post_detail' pk=board.pk %}">{{ board.title }} | {{ board.created_date }}</a></li>
+
+        {% endfor %}
+    </ol>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block board %}
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+</head>
+    <div>
+        <div>
+            <h1><a href="{% url 'board:post_list' %}">태군쨩 게시판</a></h1>
+            <a href="{% url 'board:post_list' %}">목록보기</a></h3>
+            <a href="{% url 'board:post_new' %}">새글쓰기</a></h4>
+            <a href="" >초안목록</a></h4>
+        </div>
+    </div>
+ <div class="wrap clearfix">
+     <div>
+   {% block content %}
+   {% endblock %}
+     </div>
+</div>
+
+
+{% endblock %}

@@ -1,40 +1,25 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
+
+{% extends 'base.html' %}
+{% block blog %}
 <head>
     <meta charset="UTF-8">
     <title>태군쨩 블로그</title>
-    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
 <body>
-    <div class="dheader">
-        <div class="wrap">
-            <h1><a href="/">TK Blog</a></h1>
+    <div>
+        <div>
+            <h1><a href="{% url 'blog:post_list' %}">태군쨩 블로그</a></h1>
+            <a href="{% url 'blog:post_list' %}">목록보기</a></h3>
+            <a href="{% url 'blog:post_new' %}">새글쓰기</a></h4>
+            <a href="{% url 'blog:post_draft_list' %}" >초안목록</a></h4>
         </div>
     </div>
- <div class="wrap clearfix">   
-    <div class="b-logout">
-    {% if user.is_authenticated %}
-    </div>  
-        <div class="b-logout-box">
-            <p>안녕하세요. '{{ user.first_name }}'님</p>
-            <a href="{% url 'logout' %}">로그아웃</a>
-        </div>
-      
-    <nav class="basenav">
-        <h3><a href="/">목록보기</a></h3>
-        <h4><a href="{% url 'blog:post_new' %}">새글쓰기</a></h4>
-        <h4><a href="{% url 'blog:post_draft_list' %}" >초안목록</a></h4>
-    </nav>
-    {% else %}
-    <div class="b-login">
-        <a class="b-login-a" href="{% url 'login' %}">로그인</a>
-    </div>
-        
-    {% endif %}
-
+ <div class="wrap clearfix">
 {% block content %}
 {% endblock %}
+ </div>
+
 </div>
 </body>
 </html>
+{% endblock %}

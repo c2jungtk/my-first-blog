@@ -1,0 +1,10 @@
+{% extends 'board/base.html' %}
+{% block content %}
+
+        {% for board in boards %}
+
+            <li style="border-bottom : 1px solid #333;"><a href="{% url 'board:post_detail' pk=board.pk %}">{{ board.title }} | {{ board.author }} | {{ board.created_date }}</a></li>
+        {% endfor %}
+
+{% endblock %}
+<!--{{ boards }}-->
