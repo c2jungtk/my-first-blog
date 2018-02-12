@@ -5,14 +5,14 @@
       <div class="list-div">
         <section class="list-sec">
         <hr>      
-        <a class="title-a" href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>        
-          &nbsp;
+        <a class="title-a" href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
+
           <p class="p-inline">Comments: {{ post.approved_comments.count }}</p><hr>
           <p class="p-text">{{ post.text|linebreaksbr }}</p>
          <p class="p-pub"><span>published</span>: {{ post.published_date }}</p>
           {% if user.is_authenticated %}&nbsp;<a class="a-del" href="{% url 'blog:post_remove' pk=post.pk %}">[삭제]</a>
 
-        {% endif %}
+          {% endif %}
 
          
         </section>

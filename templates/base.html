@@ -19,13 +19,16 @@
     {% if user.is_authenticated %}
 
         <div class="wrap">
-            <p>안녕하세요. '{{ user.first_name }}'님</p>
+            <p>안녕하세요. '{{ user.username }}'님</p>
             <a href="{% url 'logout' %}">로그아웃</a>
+            <a href="{% url 'password_change' %}">비밀번호 변경</a>
+
         </div>
 
     {% else %}
         <div >
             <a href="{% url 'login' %}">로그인</a>
+            <a href="{% url 'register' %}">회원가입</a>
         </div>
     </div>
     {% endif %}
@@ -41,5 +44,6 @@
     {% endblock %}
     {% block board %}
     {% endblock %}
-
+    {% block content %}
+    {% endblock %}
 </div>

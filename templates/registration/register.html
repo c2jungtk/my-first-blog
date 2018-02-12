@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>회원가입</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% if form.errors %}
+        <p>아래 내용을 다시 확인하세요.</p>
+    {% endif %}
+    <div>
+        <p>{{ form.username.label_tag }}</p>{{ form.username }}
+        <p>{{ form.password1.label_tag }}</p>{{ form.password1 }}
+        <p>{{ form.password2.label_tag }}</p>{{ form.password2 }}
+    </div>
+
+    <input type="submit" value="회원가입">
+
+{% endblock %}
+
+</form>
