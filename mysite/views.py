@@ -15,9 +15,8 @@ from django.contrib.auth.forms import UserCreationForm
 def home(request):
     now = datetime.datetime.now()
     html = "<html><body>It is now %s.</body><html>"% now
-    posts = Post.objects.order_by('-created_date')[0:5]
-    boards = Board.objects.order_by('-created_date')[0:5]
-
+    posts = Post.objects.order_by('-created_date')[:5]
+    boards = Board.objects.order_by('-created_date')[:5]
     return render(request, 'home.html', {'posts': posts, 'boards': boards} )
 
 class UserRegister(CreateView):

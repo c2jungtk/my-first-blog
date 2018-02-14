@@ -1,9 +1,10 @@
 {% extends 'board/base.html' %}
 {% block content %}
 
-    <p>{{ board.title }}</p>
-    <p>{{ board.author }}</p>
-    <p>{{ board.text }}</p>
+    <p>타이틀 : {{ board.title }}</p>
+    <p>유저 : {{ board.author }}</p>
+    <p>텍스트 : {{ board.text }}</p>
+    <p>카테고리 : {{ board.category }}</p>
 
 
 {% endblock %}

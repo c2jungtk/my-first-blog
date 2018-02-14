@@ -3,8 +3,11 @@
 
         {% for board in boards %}
 
-            <li style="border-bottom : 1px solid #333;"><a href="{% url 'board:post_detail' pk=board.pk %}">{{ board.title }} | {{ board.author }} | {{ board.created_date }}</a></li>
+            <a href="{% url 'board:post_detail' pk=board.pk %}">
+                <p>타이틀 : {{ board.title }}</p><hr>
+                <p>유저 : {{ board.author }}</p><hr>
+                <p>날짜 : {{ board.created_date }}</p><hr><br><br><br>
+            </a>
         {% endfor %}
-
 {% endblock %}
 <!--{{ boards }}-->
