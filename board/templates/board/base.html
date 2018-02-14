@@ -10,8 +10,10 @@
             <h1><a href="{% url 'board:post_list' %}">태군쨩 게시판</a></h1>
             <a href="{% url 'board:post_list' %}">목록보기</a>
 
-            <a href="{% url 'board:post_list' %}?category=news">새소식</a>
-            <a href="{% url 'board:post_list' %}?category=free">자유게시판</a>
+            {% for category in categolies %}
+            <a href="{% url 'board:post_list' %}?category={{ category }}">{{ category.title }}</a>
+            {% endfor %}
+
 
             <a href="{% url 'board:post_new' %}">새글쓰기</a>
 
@@ -22,7 +24,7 @@
          <br>
    <!--{{ boards }}-->
          <br><br>
-   {% block content %}
+   {% block sub_content %}
    {% endblock %}
      </div>
 </div>

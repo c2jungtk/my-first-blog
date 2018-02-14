@@ -7,15 +7,16 @@ from django.contrib.auth.decorators import login_required
 from board.forms import BoardForm
 # Create your views here.
 def post_list(request):
-    ctg = request.GET.get("category")
-    if ctg == 'news':
-        boards = Board.objects.filter(category = 2)
-    elif ctg == 'free':
-        boards = Board.objects.filter(category = 1)
+    category = request.GET.get("category")
+    if category != None:
+
+            boards = Board.objects.filter(category__name = category)
+
     else:
         boards = Board.objects.all()
 
-    return render(request, 'board/post_list.html', {'boards': boards, 'ctg': ctg})
+    category = Category.objects.all()
+    return render(request, 'board/post_list.html', {'boards': boards, 'categolies': category})
 
 
 
@@ -37,7 +38,7 @@ def post_list(request):
 
 
 def post_detail(request, pk):
-    ctgr = Category.objects.all()
+
     board = get_object_or_404(Board, pk=pk)
     return render(request, 'board/post_detail.html', {'board': board})
 
@@ -56,6 +57,7 @@ def post_new(request):
 
     return render(request, 'board/post_edit.html', {'form': form})
 
+
 def post_edit(request, pk):
 
     post = get_object_or_404(Board, pk=pk)
@@ -64,10 +66,10 @@ def post_edit(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-
             post.save()
-            return redirect('Board:post_detail', pk=post.pk)
+            return redirect('board:post_detail', pk=post.pk)
     else:
         form = BoardForm(instance=post)
 
-    return render(request, 'Board/post_edit.html', {'form': form})
+    return render(request, 'board/post_edit.html', {'form': form})
+

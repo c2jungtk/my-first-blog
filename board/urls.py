@@ -3,7 +3,7 @@ from django.conf.urls import url
 from board import views
 
 urlpatterns = [
-    url(r'', views.post_list, name='post_list'),
+    url(r'^$', views.post_list, name='post_list'),
     # url(r'^$', views.post_list, { 'ctg': '' }, name='post_list'),
     # url(r'^news/$', views.post_list, { 'ctg': 'news' }, name='news_post_list'),
     # url(r'^free/$', views.post_list, { 'ctg': 'free' }, name='free_post_list'),
