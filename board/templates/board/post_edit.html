@@ -4,9 +4,14 @@
 <div>
 	<h1>새 글쓰기</h1>
 	
-	<form action="" method="POST">
+	<form action="" method="POST" enctype="multipart/form-data">
 	    {% csrf_token %}
 	    {{ form.as_p }}
+		<p>첨부할 파일을 선택해 주세요.</p>
+		{{ file.as_p }}
+		<p>첨부할 이미지를 선택해 주세요.</p>
+		{{ image.as_p }}
+		<br>
 	    <button type="submit">쓰기</button>
 
 	</form>

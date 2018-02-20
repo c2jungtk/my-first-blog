@@ -1,0 +1,16 @@
+
+
+{% for ctgry in categories %}
+
+<a href="{% url 'board:post_list' %}?category={{ ctgry }}">{{ ctgry }}</a>
+
+{% endfor %}
+
+Category.objects.all()
+
+return render(request, 'board/post_list.html', {'boards': boards, 'ctg': ctg, 'categories':category})
+
+files = post.file_set.all()
+
+
+

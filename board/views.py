@@ -2,15 +2,15 @@ from django.shortcuts import render
 from board.models import Board, Category
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from board.models import File, Image
 
-
-from board.forms import BoardForm
+from board.forms import BoardForm, FileForm, ImageForm
 # Create your views here.
 def post_list(request):
     category = request.GET.get("category")
     if category != None:
 
-            boards = Board.objects.filter(category__name = category)
+        boards = Board.objects.filter(category__name = category)
 
     else:
         boards = Board.objects.all()
@@ -22,7 +22,7 @@ def post_list(request):
 
 
 
-
+# 캐릭터필드를 이용했을 때
 # @login_required
 # def post_list(request, ctg):
 #     ctgr = Category.objects.all()
@@ -40,7 +40,10 @@ def post_list(request):
 def post_detail(request, pk):
 
     board = get_object_or_404(Board, pk=pk)
-    return render(request, 'board/post_detail.html', {'board': board})
+    files = board.file_set.all()
+    images = board.image_set.all()
+
+    return render(request, 'board/post_detail.html', {'board': board, 'files': files, 'images': images})
 
 @login_required
 def post_new(request):
@@ -51,11 +54,27 @@ def post_new(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+
+            upfls = request.FILES.getlist('file')
+            for upfl in upfls:
+                file = File()
+                file.file = upfl
+                file.post = post
+                file.save()
+
+            upimgs = request.FILES.getlist('image')
+            for upimg in upimgs:
+                img = Image()
+                img.image = upimg
+                img.post = post
+                img.save()
+
             return redirect('board:post_detail', pk=post.pk)
     else:
         form = BoardForm()
-
-    return render(request, 'board/post_edit.html', {'form': form})
+        file = FileForm()
+        image = ImageForm()
+    return render(request, 'board/post_edit.html', {'form': form,'file': file, 'image': image})
 
 
 def post_edit(request, pk):
@@ -72,4 +91,8 @@ def post_edit(request, pk):
         form = BoardForm(instance=post)
 
     return render(request, 'board/post_edit.html', {'form': form})
+
+
+
+
 

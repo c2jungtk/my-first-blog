@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 from .views import home, UserRegister, UserRegisterDone
@@ -32,3 +33,4 @@ urlpatterns = [
     url(r'^accounts/register/$', UserRegister.as_view(), name="register"),
     url(r'^accounts/register/done/$', UserRegisterDone.as_view(), name="register_done"),
 ]
+urlpatterns += static('media', document_root=settings.MEDIA_ROOT)
