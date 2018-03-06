@@ -1,5 +1,5 @@
 from django.db import models
-
+from taggit.managers import TaggableManager
 import os
 # Create your models here.
 
@@ -23,7 +23,7 @@ class Board(models.Model):
     def __str__(self):
         return self.title
 
-
+# 파일 업로드
 class File(models.Model):
     file = models.FileField(upload_to='files/%Y/%m/%d/', null=True)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -42,9 +42,9 @@ class File(models.Model):
         return self.file.name
 
 
-
+# 이미지 업로드
 class Image(models.Model):
-    image = models.FileField(upload_to='files/%Y/%m/%d/', null=True)
+    image = models.FileField(upload_to='images/%Y/%m/%d/', null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(Board, null=True, on_delete=models.CASCADE)
 
@@ -57,6 +57,7 @@ class Image(models.Model):
 
     def __str__(self):
         return self.image.name
+
 
 
 

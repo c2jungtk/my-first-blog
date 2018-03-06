@@ -7,7 +7,7 @@
 </head>
     <div>
         <div>
-            <h1><a href="{% url 'board:post_list' %}">태군쨩 게시판</a></h1>
+            <h1><a href="{% url 'board:post_list' %}">게시판</a></h1>
             <a href="{% url 'board:post_list' %}">목록보기</a>
 
             {% for category in categolies %}
@@ -19,13 +19,14 @@
 
         </div>
     </div>
- <div class="wrap clearfix">
+ <div class="wrap">
      <div>
-         <br>
+
    <!--{{ boards }}-->
-         <br><br>
+
    {% block sub_content %}
    {% endblock %}
+
      </div>
 </div>
 

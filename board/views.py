@@ -43,6 +43,7 @@ def post_detail(request, pk):
     files = board.file_set.all()
     images = board.image_set.all()
 
+
     return render(request, 'board/post_detail.html', {'board': board, 'files': files, 'images': images})
 
 @login_required
@@ -69,11 +70,14 @@ def post_new(request):
                 img.post = post
                 img.save()
 
+
+
             return redirect('board:post_detail', pk=post.pk)
     else:
         form = BoardForm()
         file = FileForm()
         image = ImageForm()
+
     return render(request, 'board/post_edit.html', {'form': form,'file': file, 'image': image})
 
 
@@ -92,7 +96,8 @@ def post_edit(request, pk):
 
     return render(request, 'board/post_edit.html', {'form': form})
 
-
-
-
+def post_remove(request, pk):
+    board = get_object_or_404(Board, pk=pk)
+    board.delete()
+    return redirect('board:post_list')
 

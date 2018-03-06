@@ -6,3 +6,4 @@ admin.site.register(Board)
 admin.site.register(Category)
 admin.site.register(File)
 admin.site.register(Image)
+

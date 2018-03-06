@@ -3,11 +3,10 @@
 {% block home %}
 
 <div>
-    <h1><a href="{% url 'blog:post_list' %}">블로그 최신글</a></h1>
+    <h1><a href="{% url 'blog:post_list' %}">블로그</a></h1>
     <ol>
         {% for post in posts %}
-        <li><a href="{% url 'blog:post_detail' pk=post.pk %}">
-            {{ post.title }} | {{ post.created_date }}</a>
+        <li><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
         </li>
         {% endfor %}
     </ol>

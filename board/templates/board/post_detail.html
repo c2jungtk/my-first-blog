@@ -1,24 +1,24 @@
 {% extends 'board/base.html' %}
 {% load static %}
 {% block sub_content %}
-
-
+<a href="{% url 'board:post_edit' board.pk %}">수정하기</a>
+<a href="{% url 'board:post_remove' board.pk %}">삭제하기</a>
+<a href=""></a>
 <div>
     <p>타이틀 : {{ board.title }}</p><br>
     <p>유저 : {{ board.author }}</p><br>
-    <p>텍스트 : {{ board.text }}</p><br>
+    <p>내용 : {{ board.text }}</p><br>
     <p>카테고리 : {{ board.category }}</p><br>
 </div>
 <p>{% for image in images %}
-        <img src="{% get_media_prefix %}{{ image }}" alt="{{ image.filename }}">
+    <img src="{% get_media_prefix %}{{ image }}" alt="{{ image.filename }}">
         {% endfor %} </p>
-
 <p>{% for file in files %}
-
     <a href="{% get_media_prefix %}{{ file }}">{{ file.filename }}</a>
-
 {% endfor %}</p>
-
+<p>{% for music in musics %}
+    <a href="{% get_media_prefix %}{{ music }}">{{ music }}</a>
+{% endfor %}</p>
 
 
 

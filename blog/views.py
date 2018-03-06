@@ -5,11 +5,13 @@ from django.http import HttpResponse
 from blog.models import Post, Comment
 from django.utils import timezone
 from blog.forms import PostForm, CommnetForm
+from taggit.models import Tag
 # Create your views here.
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    tag = Tag.objects.all()
+    return render(request, 'blog/post_list.html', {'posts': posts, 'tags':tag})
 
 @login_required
 def post_new(request):
@@ -19,6 +21,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+            form.save_m2m()
             return redirect('blog:post_detail', pk=post.pk)
     else:
         form = PostForm()
@@ -27,6 +30,7 @@ def post_new(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+
     return render(request, 'blog/post_detail.html', {'post': post})
 
 @login_required
@@ -39,6 +43,7 @@ def post_edit(request, pk):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
+            form.save_m2m()
             return redirect('blog:post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
